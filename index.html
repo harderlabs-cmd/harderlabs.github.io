@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarderLabs - Smarter Solutions from Harder Thinking</title>
+    <style>
+        :root {
+            --background: #404040;
+            --primary: #a0b6f7;
+            --accent: #f2f261;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--text-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .member-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+        
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons a {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--text-light);
+                cursor: pointer;
+            }
+        }
+
+        .placeholder-img {
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container nav-container">
+            <div class="logo">Harder<span>Labs</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Smarter Solutions from Harder Thinking</h1>
+            <p>At HarderLabs, we solve problems that others overlook — with clarity, creativity, and a hands-on approach. Based in Adelaide, South Australia, we're your multidisciplinary tech and design partners.</p>
+            <a href="#services" class="btn">Our Services</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2>About HarderLabs</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At <strong>HarderLabs</strong>, we believe that the smartest solutions come from harder thinking. Based in Adelaide, South Australia, HarderLabs is a multidisciplinary tech and design studio built to solve problems that others overlook — with clarity, creativity, and a hands-on approach.</p>
+                    <p>Founded by Karl, a skilled IT support engineer, CAD specialist, and design technician with over 20 years of real-world experience, HarderLabs blends technical knowledge with practical skills to support individuals, startups, trades, and small businesses with reliable, affordable solutions.</p>
+                    <p>What makes HarderLabs different is our ability to bridge multiple disciplines under one roof. We're not just IT people. We're not just drafters. We're problem-solvers who understand how technology, design, and people work together.</p>
+                    <p>With a foundation built on real experience, a personal touch, and a drive to make technology and design work for real people, we're not just another service provider — we're your creative, technical ally.</p>
+                </div>
+                <div class="about-image placeholder-img" style="height: 400px;">
+                    <div>Team Collaboration Image</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" style="background-color: rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p>We specialise in a unique combination of services across three main areas:</p>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>IT Support</h3>
+                    <p>Fast, friendly tech support tailored to your needs — without the jargon or high costs.</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Troubleshooting devices</li>
+                        <li>Microsoft 365 setup and support</li>
+                        <li>Printer and network solutions</li>
+                        <li>Remote and on-site assistance</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>CAD & 3D Modeling</h3>
+                    <p>Professional design services for visualizing concepts and preparing files for manufacturing.</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>2D and 3D drafting</li>
+                        <li>Product design visualization</li>
+                        <li>House plans and mechanical parts</li>
+                        <li>3D printing preparation</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Digital Content Services</h3>
+                    <p>Visual polish and media support for your personal or business needs.</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Digital photo editing</li>
+                        <li>Image correction</li>
+                        <li>Technical document support</li>
+                        <li>Visual media creation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team">
+        <div class="container">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image placeholder-img" style="height: 250px;">
+                        <div>Founder Photo</div>
+                    </div>
+                    <div class="member-info">
+                        <h4 class="member-name">Karl</h4>
+                        <p class="member-title">Founder & Technical Director</p>
+                        <p>With over 20 years of experience in IT support, CAD design, and technical solutions.</p>
+                    </div>
+                </div>
+                <!-- You can add more team members here -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" style="background-color: rgba(0,0,0,0.2);">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Our services are flexible and accessible. We offer remote support across Australia and on-site help in the Adelaide area.</p>
+                    <p><span class="contact-icon">📍</span> Adelaide, South Australia</p>
+                    <p><span class="contact-icon">📱</span> Phone: [Your Phone Number]</p>
+                    <p><span class="contact-icon">✉️</span> Email: info@harderlabs.com.au</p>
+                    <div class="placeholder-img" style="height: 250px; margin-top: 20px;">
+                        <div>Adelaide Office Map</div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Harder<span>Labs</span></div>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Twitter">t</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 HarderLabs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll event for header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
